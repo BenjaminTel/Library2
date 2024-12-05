@@ -18,11 +18,6 @@ public class TagDaoImpl implements TagDao {
     private EntityManager entityManager;
 
     @Override
-    public Tag findById(long id) {
-        return entityManager.find(Tag.class, id);
-    }
-
-    @Override
     public Optional<Tag> findByName(String name) {
         try {
             return Optional.of(
@@ -34,27 +29,12 @@ public class TagDaoImpl implements TagDao {
             return Optional.empty();
         }
     }
-
-    @Override
-    public List<Tag> findAll() {
-        return entityManager.createQuery("SELECT t FROM Tag t", Tag.class).getResultList();
-    }
-
     @Override
     public void save(Tag tag) {
         if (tag.getId() == null) {
             entityManager.persist(tag);
         } else {
             entityManager.merge(tag);
-        }
-    }
-
-    @Override
-    public void delete(Tag tag) {
-        if (entityManager.contains(tag)) {
-            entityManager.remove(tag);
-        } else {
-            entityManager.remove(entityManager.merge(tag));
         }
     }
 }

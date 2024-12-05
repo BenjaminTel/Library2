@@ -13,6 +13,7 @@ target/
 *.ipr
 
 ### Eclipse ###
+.metadata
 .apt_generated
 .classpath
 .factorypath
