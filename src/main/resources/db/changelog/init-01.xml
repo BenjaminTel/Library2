@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="1" author="postgres">
+
+		<!-- ====================================================== -->
+		<!-- Création de la table author               	            -->
+		<!-- ====================================================== -->
+		<createTable tableName="author">
+			<column name="id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="last_name" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="first_name" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<!-- ====================================================== -->
+		<!-- Création de la table book                              -->
+		<!-- ====================================================== -->
+		<createTable tableName="book">
+			<column name="id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="title" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="publication_date" type="TIMESTAMP"/>
+			<column name="author_id" type="BIGINT">
+				<constraints nullable="false" foreignKeyName="fk_author" references="author(id)"/>
+			</column>
+		</createTable>
+
+
+		<!-- ====================================================== -->
+		<!-- Création de la table usr            			        -->
+		<!-- ====================================================== -->
+		<createTable tableName="usr">
+			<column name="id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="username" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="login" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="password" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+		</createTable>
+
+
+		<!-- ====================================================== -->
+		<!-- Création de la table tag              					-->
+		<!-- ====================================================== -->
+		<createTable tableName="tag">
+			<column name="id" type="BIGINT">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<!-- ====================================================== -->
+		<!-- Création de la table de jointures tag_book             -->
+		<!-- ====================================================== -->
+		<createTable tableName="tag_book">
+			<column name="tag_id" type="BIGINT">
+				<constraints nullable="false" foreignKeyName="fk_tag" references="tag(id)"/>
+			</column>
+			<column name="book_id" type="BIGINT">
+				<constraints nullable="false" foreignKeyName="fk_book" references="book(id)"/>
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="tag_id, book_id" tableName="tag_book" constraintName="pk_tag_book"/>
+
+	</changeSet>
+
+</databaseChangeLog>

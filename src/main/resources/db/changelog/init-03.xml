@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="3" author="postgres">
+
+		<!-- ====================================================== -->
+		<!-- Création du compte admin 								-->
+		<!-- ====================================================== -->
+		<insert tableName="usr">
+			<column name="id" valueComputed="nextval('usr_sequence')"/>
+			<column name="username" value="admin"/>
+			<column name="login" value="admin"/>
+			<column name="password" value="$2a$10$RKeDA.39XB0GaUv25Tw6Duguxgmz8FrUqtRLD47vCg/iaaxRCYfhC"/>
+			<column name="email" value="b.tellier@ubik-ingenierie.com"/>
+		</insert>
+
+
+	</changeSet>
+
+</databaseChangeLog>

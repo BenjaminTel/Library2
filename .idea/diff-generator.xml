@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DiffGenerationConfig">
+    <option name="sourceModelValue" value="Library2:my-persistence-unit" />
+    <option name="targetDbValue" value="4d5b3168-f0e3-4258-bb0c-7dafb387a01b" />
+  </component>
+</project>

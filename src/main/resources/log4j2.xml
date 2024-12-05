@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <!-- Define Appenders -->
+    <Appenders>
+        <!-- Console Appender: Outputs logs to the console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} - %msg%n"/>
+        </Console>
+
+        <!-- File Appender: Outputs logs to a file -->
+        <File name="File" fileName="logs/application.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </File>
+    </Appenders>
+
+    <!-- Loggers Configuration -->
+    <Loggers>
+        <!-- Hibernate Debug Logger -->
+        <Logger name="org.hibernate" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <!-- JPA Hibernate related logs -->
+        <Logger name="org.springframework.orm.jpa" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <!-- Root logger configuration -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
