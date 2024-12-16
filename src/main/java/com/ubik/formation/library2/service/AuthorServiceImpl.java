@@ -55,12 +55,10 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     @Transactional
-    public void deleteAuthorsAndBooks(List<Long> authorIds) {
+    public void deleteByIds(List<Long> authorIds) {
         if (authorIds == null || authorIds.isEmpty()) {
             throw new IllegalArgumentException("Author IDs list cannot be null or empty.");
         }
-
-        bookDao.deleteBookAssociationsAndBooksByAuthorIds(authorIds);
         authorDao.deleteByIds(authorIds);
     }
 

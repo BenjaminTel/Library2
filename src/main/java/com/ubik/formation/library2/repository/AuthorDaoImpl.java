@@ -11,7 +11,7 @@ import java.util.List;
 public class AuthorDaoImpl implements AuthorDao {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public Author findById(Long id) {
@@ -48,9 +48,14 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public void deleteByIds(List<Long> ids) {
-        entityManager.createQuery("DELETE FROM Author a WHERE a.id IN :ids")
+        List<Author> authors = entityManager.createQuery(
+                        "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.id IN :ids", Author.class)
                 .setParameter("ids", ids)
-                .executeUpdate();
+                .getResultList();
+
+        for (Author author : authors) {
+            entityManager.remove(author);
+        }
     }
 
     @Override

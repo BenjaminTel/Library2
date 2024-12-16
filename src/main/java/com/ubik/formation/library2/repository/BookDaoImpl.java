@@ -51,32 +51,14 @@ public class BookDaoImpl implements BookDao {
         if (ids == null || ids.isEmpty()) {
             throw new IllegalArgumentException("Author IDs list cannot be null or empty.");
         }
-        entityManager.createNativeQuery(
-                        "DELETE FROM tag_book tb WHERE tb.book_id IN :ids")
+        List<Book> books = entityManager.createQuery(
+                        "SELECT b FROM Book b WHERE b.id IN :ids", Book.class)
                 .setParameter("ids", ids)
-                .executeUpdate();
+                .getResultList();
 
-        entityManager.createQuery("DELETE FROM Book b WHERE b.id in :ids")
-                .setParameter("ids", ids)
-                .executeUpdate();
-    }
-
-    @Override
-    public void deleteBookAssociationsAndBooksByAuthorIds(List<Long> authorIds) {
-        if (authorIds == null || authorIds.isEmpty()) {
-            throw new IllegalArgumentException("Author IDs list cannot be null or empty.");
+        for (Book book : books) {
+            entityManager.remove(book);
         }
-
-        entityManager.createNativeQuery(
-                        "DELETE FROM tag_book tb WHERE tb.book_id IN (SELECT b.id FROM book b WHERE b.author_id IN :authorIds)")
-                .setParameter("authorIds", authorIds)
-                .executeUpdate();
-
-        entityManager.createQuery(
-                        "DELETE FROM Book b WHERE b.author.id IN :authorIds"
-                )
-                .setParameter("authorIds", authorIds)
-                .executeUpdate();
     }
 
     @Override

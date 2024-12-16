@@ -16,7 +16,5 @@ public interface BookDao {
 
     void deleteByIds(List<Long> ids);
 
-    void deleteBookAssociationsAndBooksByAuthorIds(List<Long> authorIds);
-
     Long countBooks();
 }

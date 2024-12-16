@@ -24,7 +24,7 @@ public class AuthenticationController {
 
     private UserConverter userConverter;
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+    private final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 	
 	@Autowired
 	public AuthenticationController(UserService userService) {

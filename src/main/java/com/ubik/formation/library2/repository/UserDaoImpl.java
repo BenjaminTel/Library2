@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public Optional<User> findByLogin(String login) {

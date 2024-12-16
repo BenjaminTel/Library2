@@ -15,7 +15,7 @@ public interface AuthorService {
 
     void delete(Author author);
 
-    void deleteAuthorsAndBooks(List<Long> authorIds);
+    void deleteByIds(List<Long> authorIds);
 
     Long countAuthors();
 

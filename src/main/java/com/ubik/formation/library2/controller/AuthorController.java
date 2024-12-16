@@ -78,7 +78,7 @@ public class AuthorController {
             model.addAttribute("errorMessage", "You must select at least one author to delete");
             return "error/globalError";
         }
-        authorService.deleteAuthorsAndBooks(authorIds);
+        authorService.deleteByIds(authorIds);
         return "redirect:/authors";
     }
 
